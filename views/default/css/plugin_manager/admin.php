@@ -118,7 +118,8 @@
     color: #666666;
     font-size: 40px;
     height: 45px;
-    line-height: 50px;
+    line-height: 45px;
+    overflow: hidden;
     padding-left: 10px;
 }
 
