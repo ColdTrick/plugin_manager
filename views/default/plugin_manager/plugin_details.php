@@ -52,6 +52,8 @@ if ($action) {
 
 $action_button = elgg_view('output/url', $options);
 
+$action_button = elgg_trigger_plugin_hook("action_button", "plugin", array("entity" => $plugin), $action_button);
+
 $categories = $plugin->getManifest()->getCategories();
 $categories_html = '';
 if ($categories) {
