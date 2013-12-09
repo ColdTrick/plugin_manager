@@ -161,9 +161,10 @@
 .plugin-manager-details-container > div {
 	border: 2px solid #EEE;
     float: left;
-    min-height: 450px;
+    height: 450px;
     width: 495px;
     padding: 5px;
+    overflow: auto;
 }
 
 .plugin-manager-details-screenshots > ul {

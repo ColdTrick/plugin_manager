@@ -107,6 +107,11 @@ $info_html .= "<tr><td>" . elgg_echo('admin:plugins:label:location') . "</td><td
 
 $info_html .= "</table>";
 
+$extra_info = elgg_echo("admin:plugins:info:" . $plugin->getID());
+if ($extra_info !== ("admin:plugins:info:" . $plugin->getID())) {
+	$info_html .= "<div class='mtm'>" . $extra_info . "</div>";
+}
+
 $resources = array(
 		'repository' => $plugin->getManifest()->getRepositoryURL(),
 		'bugtracker' => $plugin->getManifest()->getBugTrackerURL(),
