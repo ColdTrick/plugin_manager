@@ -1,5 +1,9 @@
 = Version History =
 
+2.1 (2014-03-18):
+
+- changed: updated to Elgg coding standards
+
 2.0 (2013-12-06):
 
 - added: popup with plugin details 
