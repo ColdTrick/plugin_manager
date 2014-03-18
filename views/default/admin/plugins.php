@@ -11,7 +11,7 @@
 elgg_load_js('lightbox');
 elgg_load_css('lightbox');
 
-elgg_generate_plugin_entities();
+_elgg_generate_plugin_entities();
 $installed_plugins = elgg_get_plugins('any');
 
 // Get a list of the all categories
