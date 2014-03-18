@@ -1,4 +1,5 @@
 <?php
+
 $guid = get_input("guid");
 
 if (!$guid) {
@@ -15,8 +16,8 @@ $can_activate = $plugin->canActivate();
 
 // always let them deactivate
 $options = array(
-		'is_action' => true,
-		'is_trusted' => true,
+	'is_action' => true,
+	'is_trusted' => true,
 );
 
 if ($active) {
@@ -28,7 +29,7 @@ if ($active) {
 		$classes[] = 'elgg-state-active';
 		$options['class'] = 'elgg-button elgg-state-warning';
 	}
-} else if ($can_activate) {
+} elseif ($can_activate) {
 	$classes[] = 'elgg-state-inactive';
 	$action = 'activate';
 	$options['text'] = "<span title='" . elgg_echo('admin:plugins:activate') . "' class='plugin-manager-icon plugin-manager-icon-activate'></span>";
@@ -44,7 +45,7 @@ if ($active) {
 
 if ($action) {
 	$url = elgg_http_add_url_query_elements($actions_base . $action, array(
-			'plugin_guids[]' => $plugin->guid
+		'plugin_guids[]' => $plugin->guid
 	));
 
 	$options['href'] = $url;
@@ -113,9 +114,9 @@ if ($extra_info !== ("admin:plugins:info:" . $plugin->getID())) {
 }
 
 $resources = array(
-		'repository' => $plugin->getManifest()->getRepositoryURL(),
-		'bugtracker' => $plugin->getManifest()->getBugTrackerURL(),
-		'donate' => $plugin->getManifest()->getDonationsPageURL(),
+	'repository' => $plugin->getManifest()->getRepositoryURL(),
+	'bugtracker' => $plugin->getManifest()->getBugTrackerURL(),
+	'donate' => $plugin->getManifest()->getDonationsPageURL(),
 );
 
 $resources_html = "";

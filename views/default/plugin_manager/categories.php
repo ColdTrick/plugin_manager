@@ -1,8 +1,7 @@
 <?php
-// var_dump($vars["category"]);
-// var_dump($vars["category_options"]);
 
 $body = "<ul class='plugin-manager-categories elgg-admin-sidebar-menu clearfix'>";
+
 foreach ($vars["category_options"] as $key => $category) {
 	if ($key) {
 		$key = preg_replace('/[^a-z0-9-]/i', '-', $key);
