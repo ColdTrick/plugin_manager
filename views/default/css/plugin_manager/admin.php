@@ -103,6 +103,21 @@
 	background-position: 0 -54px;
 }
 
+.plugin-manager-lightbox #cboxBottomRight,
+.plugin-manager-lightbox #cboxBottomCenter,
+.plugin-manager-lightbox #cboxBottomLeft,
+.plugin-manager-lightbox #cboxMiddleRight,
+.plugin-manager-lightbox #cboxMiddleLeft,
+.plugin-manager-lightbox #cboxTopRight,
+.plugin-manager-lightbox #cboxTopCenter,
+.plugin-manager-lightbox #cboxTopLeft {
+	display: none;
+}
+
+.plugin-manager-lightbox #cboxLoadedContent {
+	padding: 0;
+}
+
 .elgg-module-plugin-details .elgg-plugin {
 	border: none;
 	margin: 0;

@@ -181,7 +181,15 @@ if (elgg_view_exists($settings_view_old) || elgg_view_exists($settings_view_new)
 			<div class="elgg-head">
 				<?php
 					echo $links;
-					echo "<a href='" . elgg_get_site_url() . "ajax/view/plugin_manager/plugin_details?guid=" . $plugin->getGUID() . "' class='elgg-lightbox'>" . $plugin->getManifest()->getName() . "</a> $settings_link";
+					$url_options = array(
+						"href" => "ajax/view/plugin_manager/plugin_details?guid=" . $plugin->getGUID(),
+						"text" => $plugin->getManifest()->getName(),
+						"class" => "elgg-lightbox",
+						"data-colorbox-opts" => '{"className": "plugin-manager-lightbox", "closeButton": false}'
+					);
+					echo elgg_view("output/url", $url_options);
+					
+					echo " ". $settings_link;
 				?>
 				<span class="plugin-manager-list-description">
 					<?php echo $description;?>
