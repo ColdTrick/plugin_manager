@@ -1,11 +1,12 @@
 <?php
 ?>
+//<script>
 elgg.provide("elgg.plugin_manager");
 
 elgg.plugin_manager.init = function() {
 
 	// category filtering
-	$(".plugin-manager-categories a").live('click', function(event) {
+	$(document).on('click', '.plugin-manager-categories a', function(event) {
 		// remove selected state from all buttons
 		$(".plugin-manager-categories li").removeClass("elgg-state-selected");
 	
@@ -16,7 +17,7 @@ elgg.plugin_manager.init = function() {
 	});
 	
 	// details selection
-	$(".plugin-manager-details-container > ul >li").live('click', function(event) {
+	$(document).on('click', '.plugin-manager-details-container > ul > li', function(event) {
 		// remove selected state from all buttons
 		$(".plugin-manager-details-container > ul > li").removeClass("elgg-state-selected");
 		
@@ -27,17 +28,13 @@ elgg.plugin_manager.init = function() {
 	});
 	
 	// screenshots
-	$(".plugin-manager-details-screenshots .elgg-plugin-screenshot").live({
-		mouseenter: function() {
-			$(this).parent().find(".elgg-plugin-screenshot").removeClass("elgg-state-selected");
-			$(this).addClass("elgg-state-selected");
-			
-			$(".plugin-manager-details-screenshots > div > img").hide();
-			$(".plugin-manager-details-screenshots > div > img[rel='" + $(this).attr("rel") + "']").show();
-		}
+	$(document).on('mouseenter', '.plugin-manager-details-screenshots .elgg-plugin-screenshot', function() {
+		$(this).parent().find(".elgg-plugin-screenshot").removeClass("elgg-state-selected");
+		$(this).addClass("elgg-state-selected");
+		
+		$(".plugin-manager-details-screenshots > div > img").hide();
+		$(".plugin-manager-details-screenshots > div > img[rel='" + $(this).attr("rel") + "']").show();
 	});
-	
-	
 };
 
 // register init hook

@@ -1,13 +1,13 @@
 <?php
 
-$guid = get_input("guid");
+$guid = (int) get_input("guid");
 
-if (!$guid) {
+if (empty($guid)) {
 	return;
 }
 
 $plugin = get_entity($guid);
-if (!elgg_instanceof($plugin)) {
+if (!elgg_instanceof($plugin, 'object', 'plugin')) {
 	return;
 }
 
@@ -23,7 +23,10 @@ $options = array(
 if ($active) {
 	$classes[] = 'elgg-state-active';
 	$action = 'deactivate';
-	$options['text'] = "<span title='" . elgg_echo('admin:plugins:deactivate') . "' class='plugin-manager-icon plugin-manager-icon-deactivate'></span>";
+	$options['text'] = elgg_format_element('span', array(
+		'title' => elgg_echo('admin:plugins:deactivate'),
+		'class' => 'plugin-manager-icon plugin-manager-icon-deactivate'
+	));
 
 	if (!$can_activate) {
 		$classes[] = 'elgg-state-active';
@@ -32,20 +35,25 @@ if ($active) {
 } elseif ($can_activate) {
 	$classes[] = 'elgg-state-inactive';
 	$action = 'activate';
-	$options['text'] = "<span title='" . elgg_echo('admin:plugins:activate') . "' class='plugin-manager-icon plugin-manager-icon-activate'></span>";
+	$options['text'] = elgg_format_element('span', array(
+		'title' => elgg_echo('admin:plugins:activate'),
+		'class' => 'plugin-manager-icon plugin-manager-icon-activate'
+	));
 
 } else {
 	$classes[] = 'elgg-state-inactive';
 	$action = '';
-	$options['text'] = elgg_echo('admin:plugins:cannot_activate');
-	$options['text'] = "<span title='" . elgg_echo('admin:plugins:cannot_activate') . "' class='plugin-manager-icon plugin-manager-icon-cannot-activate'></span>";
-
+	$options['text'] = elgg_format_element('span', array(
+		'title' => elgg_echo('admin:plugins:cannot_activate'),
+		'class' => 'plugin-manager-icon plugin-manager-icon-cannot-activate'
+	));
+	
 	$options['disabled'] = 'disabled';
 }
 
 if ($action) {
 	$url = elgg_http_add_url_query_elements($actions_base . $action, array(
-		'plugin_guids[]' => $plugin->guid
+		'plugin_guids[]' => $plugin->getGUID()
 	));
 
 	$options['href'] = $url;
@@ -60,7 +68,7 @@ $categories_html = '';
 if ($categories) {
 	foreach ($categories as $category) {
 		$friendly_category = htmlspecialchars(ElggPluginManifest::getFriendlyCategory($category));
-		$categories_html .= "<li class=\"elgg-plugin-category prm\">$friendly_category</li>";
+		$categories_html .= elgg_format_element('li', array('class' => 'elgg-plugin-category prm'), $friendly_category);
 	}
 }
 
@@ -68,7 +76,7 @@ $screenshots_menu = '';
 $screenshots_body = '';
 $screenshots = $plugin->getManifest()->getScreenshots();
 if ($screenshots) {
-	$base_url = elgg_get_plugins_path() . $plugin->getID() . '/';
+	
 	foreach ($screenshots as $key => $screenshot) {
 		
 		$state = "";
@@ -79,12 +87,25 @@ if ($screenshots) {
 		
 		$desc = elgg_echo($screenshot['description']);
 		$alt = htmlentities($desc, ENT_QUOTES, 'UTF-8');
-		$screenshot_full = "{$vars['url']}admin_plugin_screenshot/{$plugin->getID()}/full/{$screenshot['path']}";
-		$screenshot_src = "{$vars['url']}admin_plugin_screenshot/{$plugin->getID()}/thumbnail/{$screenshot['path']}";
-
-		$screenshots_menu .= "<li rel='$rel' class=\"elgg-plugin-screenshot pas $state\" title='" . $alt . "'><img src=\"$screenshot_src\" alt=\"$alt\"></li>";
 		
-		$screenshots_body .= "<img rel='$rel' class='hidden $state' src=\"$screenshot_full\" alt=\"$alt\" title='" . $alt . "'>";
+		$thumbnail = elgg_view('output/img', array(
+			'src' => "admin_plugin_screenshot/{$plugin->getID()}/thumbnail/{$screenshot['path']}",
+			'alt' => $alt
+		));
+		$attr = array(
+			'rel' => $rel,
+			'class' => "elgg-plugin-screenshot pas $state",
+			'title' => $alt
+		);
+		$screenshots_menu .= elgg_format_element('li', $attr, $thumbnail);
+		
+		$screenshots_body .= elgg_view('output/img', array(
+			'src' => "admin_plugin_screenshot/{$plugin->getID()}/full/{$screenshot['path']}",
+			'alt' => $alt,
+			'title' => $alt,
+			'class' => "hidden $state",
+			'rel' => $rel
+		));
 	}
 	
 	$screenshots_menu = "<ul>" . $screenshots_menu . "</ul>";

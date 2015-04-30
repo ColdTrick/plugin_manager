@@ -1,12 +1,25 @@
 <?php
 
-$body = "<ul class='plugin-manager-categories elgg-admin-sidebar-menu clearfix'>";
+$categories = elgg_extract('category_options', $vars);
+if (empty($categories)) {
+	return;
+}
 
-foreach ($vars["category_options"] as $key => $category) {
-	if ($key) {
-		$key = preg_replace('/[^a-z0-9-]/i', '-', $key);
-		$body .= "<li class='elgg-button float mas'><a href='#' rel='" . $key . "'>" . $category . "</a></li>";
+$body = "<ul class='plugin-manager-categories elgg-admin-sidebar-menu'>";
+
+foreach ($categories as $key => $category) {
+	if (empty($key)) {
+		continue;
 	}
+	
+	$key = preg_replace('/[^a-z0-9-]/i', '-', $key);
+	$link = elgg_view('output/url', array(
+		'text' => $category,
+		'href' => '#',
+		'rel' => $key
+	));
+	
+	$body .= elgg_format_element('li', array(), $link);
 }
 $body .= "</ul>";
 

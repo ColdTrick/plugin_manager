@@ -39,6 +39,8 @@
 	font-weight: normal;
 	font-size: 1em;
 	margin: 0 !important;
+	float: left;
+	padding-right: 5px;
 }
 
 .plugin-manager-list-description {
