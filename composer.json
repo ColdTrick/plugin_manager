@@ -1,0 +1,17 @@
+{
+	"name": "coldtrick/plugin_manager",
+	"description": "Simplifies plugin management",
+	"type": "elgg-plugin",
+	"keywords": ["elgg", "plugin"],
+	"license": "GPL-2.0",
+	"support": {
+		"source": "https://github.com/ColdTrick/plugin_manager",
+		"issues": "https://github.com/ColdTrick/plugin_manager/issues"
+	},
+	"require": {
+		"composer/installers": "^1.0.8"
+	},
+	"require-dev": {
+		"coldtrick/sniffs": "dev-master"
+	}
+}
