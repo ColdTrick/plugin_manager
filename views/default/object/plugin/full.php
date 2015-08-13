@@ -108,7 +108,7 @@ if ($active) {
 	$options['text'] = "<span title='" . elgg_echo('admin:plugins:deactivate') . "' class='plugin-manager-icon plugin-manager-icon-deactivate'></span>";
 	
 	if (!$can_activate) {
-		$classes[] = 'elgg-state-active elgg-state-cannot-activate';
+		$classes[] = 'elgg-state-cannot-activate';
 	}
 } else if ($can_activate) {
 	$classes[] = 'elgg-state-inactive';
